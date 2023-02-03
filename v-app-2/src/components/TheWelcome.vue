@@ -5,6 +5,7 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
+import Paginate from '@/components/bypass/Paginate.vue'
 import Vue, { inject } from 'vue'
 
 
@@ -42,6 +43,20 @@ const alertDisplayVue = () => {
     <h3>Test</h3>
     <button v-on:click="alertDisplayInject">SWAL con inject</button>
     <button v-on:click="alertDisplayVue">SWAL con Vue.swal</button>
+    <br/>
+    <br/>
+    <paginate
+    :page-count="20"
+    :page-range="3"
+    :margin-pages="2"
+    :click-handler="clickCallback"
+    :prev-text="'Prev'"
+    :next-text="'Next'"
+    :container-class="'pagination'"
+    :page-class="'page-item'"
+  >
+  </paginate>
+
 
     <WelcomeItem>
       <template #icon>
