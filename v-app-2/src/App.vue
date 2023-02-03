@@ -1,5 +1,17 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import swal from 'sweetalert2';
+
+const alertDisplay = () => {
+
+  swal.fire({
+          icon: "success",
+          title: "",
+          confirmButtonColor: '#d33',
+          text: "Se cambio el estatus correctamente",
+        });
+}
+
 </script>
 
 <template>
@@ -16,6 +28,7 @@ import HelloWorld from './components/HelloWorld.vue'
         </nav>
 
         <h3>Test</h3>
+        <button v-on:click="alertDisplay">Click me</button>
         
       </div>
     </header>
