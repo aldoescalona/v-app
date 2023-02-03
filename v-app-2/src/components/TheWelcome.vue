@@ -6,33 +6,67 @@ import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
 import Paginate from '@/components/bypass/Paginate.vue'
-import Vue, { inject } from 'vue'
+import Loading from 'vue-loading-overlay';
+// import { useLoading } from 'vue-loading-overlay'
+import Vue, { inject, onMounted, ref } from 'vue'
 
 
 const swal = inject("$swal");
 console.log(swal)
 
+const isLoading = ref(false)
+const fullPage = ref(true)
+
+onMounted(async () => {
+  // console.log(useLoading)
+})
 
 const alertDisplayInject = () => {
-  
+
   swal.fire({
-          icon: "success",
-          title: "",
-          confirmButtonColor: '#d33',
-          text: "Se cambio el estatus correctamente Inject",
-        });
-    
+    icon: "success",
+    title: "",
+    confirmButtonColor: '#d33',
+    text: "Se cambio el estatus correctamente Inject",
+  });
+
 }
 
 const alertDisplayVue = () => {
-    
-    Vue.swal({
-          icon: "success",
-          title: "",
-          confirmButtonColor: '#d33',
-          text: "Se cambio el estatus correctamente Vue",
-        })
 
+  Vue.swal({
+    icon: "success",
+    title: "",
+    confirmButtonColor: '#d33',
+    text: "Se cambio el estatus correctamente Vue",
+  })
+
+}
+
+const clickCallback = () => {
+
+}
+
+const doAjaxTag = () => {
+
+  isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false
+  }, 2000)
+}
+
+const doAjaxVue = () => {
+
+  let loader = Vue.$loading.show()
+
+  setTimeout(() => {
+    loader.hide()
+  }, 2000)
+
+}
+
+const onCancel = () => {
+  console.log('User cancelled the loader.')
 }
 
 </script>
@@ -40,23 +74,26 @@ const alertDisplayVue = () => {
 <template>
   <div>
 
+
     <h3>Test</h3>
     <button v-on:click="alertDisplayInject">SWAL con inject</button>
     <button v-on:click="alertDisplayVue">SWAL con Vue.swal</button>
-    <br/>
-    <br/>
-    <paginate
-    :page-count="20"
-    :page-range="3"
-    :margin-pages="2"
-    :click-handler="clickCallback"
-    :prev-text="'Prev'"
-    :next-text="'Next'"
-    :container-class="'pagination'"
-    :page-class="'page-item'"
-  >
-  </paginate>
+    <br />
+    <br />
+    <paginate :page-count="20" :page-range="3" :margin-pages="2" :click-handler="clickCallback" :prev-text="'Prev'"
+      :next-text="'Next'" :container-class="'pagination'" :page-class="'page-item'">
+    </paginate>
 
+
+    <div class="vld-parent">
+      <loading :active.sync="isLoading" :can-cancel="true" :on-cancel="onCancel" :is-full-page="fullPage" loader="dots">
+      </loading>
+
+      <label style="display: none;"><input type="checkbox" v-model="fullPage">Full page?</label>
+
+      <button @click.prevent="doAjaxTag">fetch Data Tag</button>
+      <button @click.prevent="doAjaxVue">fetch Data Vue</button>
+    </div>
 
     <WelcomeItem>
       <template #icon>
@@ -81,9 +118,8 @@ const alertDisplayVue = () => {
       <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>. If you need to
       test your components and web pages, check out
       <a href="https://www.cypress.io/" target="_blank">Cypress</a> and
-      <a href="https://docs.cypress.io/guides/component-testing/introduction" target="_blank"
-        >Cypress Component Testing</a
-      >.
+      <a href="https://docs.cypress.io/guides/component-testing/introduction" target="_blank">Cypress Component
+        Testing</a>.
 
       <br />
 
