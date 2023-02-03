@@ -1,16 +1,16 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import swal from 'sweetalert2';
+import { inject, onMounted, provide, ref } from 'vue';
 
-const alertDisplay = () => {
 
-  swal.fire({
-          icon: "success",
-          title: "",
-          confirmButtonColor: '#d33',
-          text: "Se cambio el estatus correctamente",
-        });
-}
+const val = ref(5)
+provide("$swal", swal)
+
+onMounted(async () => {
+  console.log(val.value)
+})
+
 
 </script>
 
@@ -27,8 +27,7 @@ const alertDisplay = () => {
           <router-link to="/about">About</router-link>
         </nav>
 
-        <h3>Test</h3>
-        <button v-on:click="alertDisplay">Click me</button>
+        
         
       </div>
     </header>

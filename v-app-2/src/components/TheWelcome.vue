@@ -5,10 +5,44 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
+import Vue, { inject } from 'vue'
+
+
+const swal = inject("$swal");
+console.log(swal)
+
+
+const alertDisplayInject = () => {
+  
+  swal.fire({
+          icon: "success",
+          title: "",
+          confirmButtonColor: '#d33',
+          text: "Se cambio el estatus correctamente Inject",
+        });
+    
+}
+
+const alertDisplayVue = () => {
+    
+    Vue.swal({
+          icon: "success",
+          title: "",
+          confirmButtonColor: '#d33',
+          text: "Se cambio el estatus correctamente Vue",
+        })
+
+}
+
 </script>
 
 <template>
   <div>
+
+    <h3>Test</h3>
+    <button v-on:click="alertDisplayInject">SWAL con inject</button>
+    <button v-on:click="alertDisplayVue">SWAL con Vue.swal</button>
+
     <WelcomeItem>
       <template #icon>
         <DocumentationIcon />
