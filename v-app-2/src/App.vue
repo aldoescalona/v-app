@@ -14,9 +14,11 @@ import HelloWorld from './components/HelloWorld.vue'
           <router-link to="/">Home</router-link>
           <router-link to="/about">About</router-link>
         </nav>
+
+        <h3>Test</h3>
+        
       </div>
     </header>
-
     <router-view />
   </div>
 </template>
