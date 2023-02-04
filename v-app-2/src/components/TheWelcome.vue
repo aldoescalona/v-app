@@ -8,7 +8,9 @@ import SupportIcon from './icons/IconSupport.vue'
 import Paginate from '@/components/bypass/Paginate.vue'
 import Loading from 'vue-loading-overlay';
 // import { useLoading } from 'vue-loading-overlay'
-import Vue, { inject, onMounted, ref } from 'vue'
+import Vue, { inject, onMounted, ref, reactive } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { email, required, minLength } from '@vuelidate/validators'
 
 
 const swal = inject("$swal");
@@ -19,6 +21,8 @@ const fullPage = ref(true)
 
 onMounted(async () => {
   // console.log(useLoading)
+
+  // console.log(useVuelidate)
 })
 
 const alertDisplayInject = () => {
@@ -69,6 +73,16 @@ const onCancel = () => {
   console.log('User cancelled the loader.')
 }
 
+const name = ref('')
+const fieldLength = ref(5)
+
+const rules = {
+  name: { minLength: minLength(fieldLength) }
+}
+  
+const v$ = useVuelidate(rules, { name })
+console.log(v$)
+
 </script>
 
 <template>
@@ -94,6 +108,16 @@ const onCancel = () => {
       <button class="btn btn-primary" @click.prevent="doAjaxTag">Loading Tag</button>
       <button class="btn btn-secondary" @click.prevent="doAjaxVue">Loading Vue</button>
     </div>
+
+    <br/>
+    <br/>
+    <pre>
+      {{ v$.name.minLength }}
+    </pre>
+    <div>
+      <label>Name Length: <input type="text" v-model="fieldLength"></label>
+      <label>Name: <input type="text" v-model="v$.name.$model"></label>
+    </div>    
 
     <WelcomeItem>
       <template #icon>
