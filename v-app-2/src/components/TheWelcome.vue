@@ -12,6 +12,8 @@ import Vue, { inject, onMounted, ref, reactive } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { email, required, minLength } from '@vuelidate/validators'
 
+import DatePicker from 'vue2-datepicker';
+
 
 const swal = inject("$swal");
 console.log(swal)
@@ -81,7 +83,18 @@ const rules = {
 }
   
 const v$ = useVuelidate(rules, { name })
-console.log(v$)
+
+
+const date = ref()
+
+
+const disabledBeforeTodayAndAfterAWeek = (date) => {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // return date < today || date > new Date(today.getTime() + 7 * 24 * 3600 * 1000);
+      return date > today;
+    }
 
 </script>
 
@@ -118,6 +131,14 @@ console.log(v$)
       <label>Name Length: <input type="text" v-model="fieldLength"></label>
       <label>Name: <input type="text" v-model="v$.name.$model"></label>
     </div>    
+
+    <br/>
+    <div>
+      <pre>{{ date }}</pre>
+      <date-picker v-model="date" 
+      :disabled-date="disabledBeforeTodayAndAfterAWeek" 
+      format="DD/MM/YYYY"></date-picker>
+    </div>
 
     <WelcomeItem>
       <template #icon>

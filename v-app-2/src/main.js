@@ -11,6 +11,9 @@ import './assets/main.css'
 import './styles/styles.scss'
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import 'vue2-datepicker/index.css';
+
+import 'vue2-datepicker/locale/es';
 // import 'vue-loading-overlay/dist/css/index.css';
 
 Vue.use(PiniaVuePlugin)
