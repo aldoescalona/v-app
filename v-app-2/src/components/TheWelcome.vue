@@ -140,6 +140,26 @@ const disabledBeforeTodayAndAfterAWeek = (date) => {
       format="DD/MM/YYYY"></date-picker>
     </div>
 
+    <font-awesome-icon icon="far fa-user"/>
+    <font-awesome-icon icon="fa-plus"/>
+    
+    <i class="far fa-search"></i>
+
+    <i class="far fa-plus"></i>
+
+  <!-- regular style -->
+  <i class="far fa-user"></i>
+
+  <!-- light style -->
+  <i class="fal fa-user"></i>
+
+  <!-- duotone style -->
+  <i class="fad fa-user"></i>
+
+  <!--brand icon-->
+  <i class="fab fa-github-square"></i>
+
+
     <WelcomeItem>
       <template #icon>
         <DocumentationIcon />
